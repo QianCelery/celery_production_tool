@@ -3,3 +3,4 @@
  * @param {*}
  * @return {*}
  */
+ insert input_manager
