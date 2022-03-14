@@ -4,3 +4,4 @@
  * @return {*}
  */
  insert input_manager
+ Creat a new branch is quick & simple
