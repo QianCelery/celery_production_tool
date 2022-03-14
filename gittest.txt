@@ -4,3 +4,4 @@
  * @return {*}
  */
  insert input_manager
+ Creating a new branch feature1.
