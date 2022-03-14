@@ -1,7 +1,7 @@
 /*
  * @Author: Celery
  * @Date: 2022-03-13 21:13:01
- * @LastEditTime: 2022-03-14 15:13:58
+ * @LastEditTime: 2022-03-14 20:04:20
  * @LastEditors: Celery
  * @Description: 
  * @FilePath: \celery_production_tool\unit_test\display_test.c
@@ -4629,17 +4629,13 @@ int lcd_put_ascii(int x, int y, unsigned char c)
     int i = 0, j = 0;
     unsigned char byte = 0x00;
 
-    for(i = 0; i != 16; ++i)
-    {
+    for (i = 0; i != 16; ++i) {
         byte = dot[i];
-        for(j = 7; j >= 0; --j)
-        {
-            if(byte & (1 << j))
-            {
+        for (j = 7; j >= 0; --j) {
+            if (byte & (1 << j)) {
                 put_pixel(x + (7 - j), y + i, 0x000000);    //黑
             }
-            else
-            {
+            else {
                 put_pixel(x + (7 - j), y + i, 0xffffff);    //白
             }
         }
