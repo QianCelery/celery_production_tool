@@ -1,7 +1,7 @@
 /*
  * @Author: Celery
  * @Date: 2022-03-13 21:12:18
- * @LastEditTime: 2022-03-14 15:31:06
+ * @LastEditTime: 2022-03-15 16:36:23
  * @LastEditors: Celery
  * @Description: 显示设备管理器，实现对各类显示设备的注册与操作
  * @FilePath: \celery_production_tool\display\display_manager.c
@@ -165,5 +165,4 @@ void sys_display_register(void)
 {
     extern void framebuffer_register(void);
     framebuffer_register();
-
 }

@@ -1,1 +1,1 @@
-obj-y += display_test.o
+obj-y += input_test.o

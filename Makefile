@@ -29,6 +29,7 @@ TARGET := test
 
 obj-y += display/
 obj-y += unit_test/
+obj-y += input/
 
 all : start_recursive_build $(TARGET)
 	@echo $(TARGET) has been built!
