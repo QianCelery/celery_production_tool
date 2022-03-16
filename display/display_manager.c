@@ -1,7 +1,7 @@
 /*
  * @Author: Celery
  * @Date: 2022-03-13 21:12:18
- * @LastEditTime: 2022-03-16 09:25:34
+ * @LastEditTime: 2022-03-16 19:06:14
  * @LastEditors: Celery
  * @Description: 显示设备管理器，实现对各类显示设备的注册与操作
  * @FilePath: \celery_production_tool\display\display_manager.c
@@ -18,6 +18,48 @@ static display_operations_t *default_display_opr = NULL;
 static display_buff_t cur_display_buff;
 static unsigned int line_width;
 static unsigned int pixel_width;
+
+/**
+ * @description: 在指定区域绘制文本信息
+ * @param {char} *text
+ * @param {region_t} region_t
+ * @param {unsigned int} color
+ * @return {*}
+ */
+void draw_text_in_region_central(char *text, region_t region, unsigned int color)
+{
+    int i = 0;
+    int ret;
+    int num = strlen(text);
+    font_bitmap_t font_bitmap;
+    int font_size = region.width / num / 2;
+
+    int origin_x;
+    int origin_y;
+
+    if (font_size > region.hight) {
+        font_size = region.hight;
+    }
+
+    set_font_size(font_size);
+
+    origin_x = region.x_res + (region.width - num * font_size) / 2;
+    origin_y = region.y_res + (region.hight - font_size) / 2;
+
+    for (i = 0; text[i] != '\0'; ++i) {
+        font_bitmap.cur_origin_x = origin_x;
+        font_bitmap.cur_origin_y = origin_y;
+        ret = get_font_bitmap(text[i], &font_bitmap);
+        if (ret) {
+            printf("draw_text_in_region_central -> get_font_bitmap err.\n");
+            return;
+        }
+        draw_font_bitmap(font_bitmap, color);
+        origin_x = font_bitmap.next_origin_x;
+        origin_y = font_bitmap.next_origin_y;
+    }
+
+}
 
 /**
  * @description: 绘制字体bitmap

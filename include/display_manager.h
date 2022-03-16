@@ -1,7 +1,7 @@
 /*
  * @Author: Celery
  * @Date: 2022-03-13 21:14:57
- * @LastEditTime: 2022-03-16 09:42:40
+ * @LastEditTime: 2022-03-16 14:42:50
  * @LastEditors: Celery
  * @Description: 显示设备管理器头文件
  *               各项数据类型定义、提供外部接口
@@ -38,6 +38,7 @@ typedef struct _display_operations_t {
     struct _display_operations_t *next;
 } display_operations_t;
 
+void draw_text_in_region_central(char *text, region_t region_t, unsigned int color);
 void draw_font_bitmap(font_bitmap_t font_bitmap, unsigned int color);
 void draw_region(region_t *region, unsigned int color);
 void put_pixel(int x, int y, unsigned int color);
