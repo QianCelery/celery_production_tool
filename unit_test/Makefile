@@ -1,1 +1,1 @@
-obj-y += ui_test.o
+obj-y += page_test.o
