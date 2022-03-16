@@ -1,7 +1,7 @@
 /*
  * @Author: Celery
  * @Date: 2022-03-13 21:14:57
- * @LastEditTime: 2022-03-14 21:11:05
+ * @LastEditTime: 2022-03-16 09:42:40
  * @LastEditors: Celery
  * @Description: 显示设备管理器头文件
  *               各项数据类型定义、提供外部接口
@@ -11,16 +11,8 @@
 #ifndef DISPLAY_MANAGER_H
 #define DISPLAY_MANAGER_H
 
-/**
- * @description: 显示区域结构体
- * 区域为长方体，提供左上坐标与长、宽
- */
-typedef struct _region {
-    int x_res;
-    int y_res;
-    int width;
-    int hight;
-} region_t;
+#include "common.h"
+#include "font_manager.h"
 
 /**
  * @description: 显示缓存结构体
@@ -46,6 +38,7 @@ typedef struct _display_operations_t {
     struct _display_operations_t *next;
 } display_operations_t;
 
+void draw_font_bitmap(font_bitmap_t font_bitmap, unsigned int color);
 void draw_region(region_t *region, unsigned int color);
 void put_pixel(int x, int y, unsigned int color);
 int set_default_display(char *name);

@@ -1,14 +1,15 @@
 /*
  * @Author: Celery
  * @Date: 2022-03-13 21:13:01
- * @LastEditTime: 2022-03-16 09:47:56
+ * @LastEditTime: 2022-03-16 10:07:45
  * @LastEditors: Celery
  * @Description: 
- * @FilePath: \celery_production_tool\unit_test\display_test.c
+ * @FilePath: \celery_production_tool\unit_test\font_test.c
  * 
  */
 #include "display_manager.h"
 #include "font_manager.h"
+#include <stdio.h>
 
 #define FONTDATAMAX 4096
 
@@ -4646,8 +4647,15 @@ int lcd_put_ascii(int x, int y, unsigned char c)
 
 int main(int argc, char **argv)
 {
-    region_t region;
+	int i;
+	int ret;
+	char str[] = "celery production tool";
+	font_bitmap_t font_bitmap;
+    //region_t region;
     display_buff_t *display_buff;
+
+	int lcd_x = 100;
+	int lcd_y = 100;
 
     sys_display_register();
     
@@ -4655,15 +4663,34 @@ int main(int argc, char **argv)
 
     default_display_init();
 
-    lcd_put_ascii(100, 100, 'C');
+	sys_font_opr_register();
+	ret = select_init_font("freetype", "FZSTK.TTF");
+	if (ret) {
+		printf("select_init_font err.\n");
+	}
+	
+	display_buff = get_display_buff();
+	
+	for (i = 0; str[i] != '\0'; ++i) {
+		font_bitmap.cur_origin_x = lcd_x;
+		font_bitmap.cur_origin_y = lcd_y;
+		get_font_bitmap(str[i], &font_bitmap);
+		draw_font_bitmap(font_bitmap, 0xffffff);
+		flush_display_buff(&font_bitmap.region, display_buff);
 
-    region.x_res = 100;
-    region.y_res = 100;
-    region.width = 8;
-    region.hight = 16;
-    display_buff = get_display_buff();
+		lcd_x = font_bitmap.next_origin_x;
+		lcd_y = font_bitmap.next_origin_y;
+	}
 
-    flush_display_buff(&region, display_buff);
+    // lcd_put_ascii(100, 100, 'C');
+
+    // region.x_res = 100;
+    // region.y_res = 100;
+    // region.width = 8;
+    // region.hight = 16;
+    // display_buff = get_display_buff();
+
+    // flush_display_buff(&region, display_buff);
 
     return 0;
 }

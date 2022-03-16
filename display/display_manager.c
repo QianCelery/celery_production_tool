@@ -1,7 +1,7 @@
 /*
  * @Author: Celery
  * @Date: 2022-03-13 21:12:18
- * @LastEditTime: 2022-03-15 16:36:23
+ * @LastEditTime: 2022-03-16 09:25:34
  * @LastEditors: Celery
  * @Description: 显示设备管理器，实现对各类显示设备的注册与操作
  * @FilePath: \celery_production_tool\display\display_manager.c
@@ -18,6 +18,32 @@ static display_operations_t *default_display_opr = NULL;
 static display_buff_t cur_display_buff;
 static unsigned int line_width;
 static unsigned int pixel_width;
+
+/**
+ * @description: 绘制字体bitmap
+ * @param {font_bitmap_t} font_bitmap
+ * @param {unsigned int} color
+ * @return {*}
+ */
+void draw_font_bitmap(font_bitmap_t font_bitmap, unsigned int color)
+{
+    int x = font_bitmap.region.x_res;
+    int y = font_bitmap.region.y_res;
+    int width = font_bitmap.region.width;
+    int hight = font_bitmap.region.hight;
+    int i, j;
+
+    for (i = 0; i != hight; ++i) {
+        for (j = 0; j != width; ++j) {
+            //越界超出显示范围不显示
+            if ((j + x) > cur_display_buff.x_res || (i + y) > cur_display_buff.y_res) 
+                continue;
+            if (font_bitmap.buff[i * width + j]) {
+                put_pixel(j + x, i + y, color);
+            }
+        }
+    }
+}
 
 /**
  * @description: 绘制region

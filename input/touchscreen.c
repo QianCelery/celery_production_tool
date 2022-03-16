@@ -1,7 +1,7 @@
 /*
  * @Author: Celery
  * @Date: 2022-03-15 14:28:54
- * @LastEditTime: 2022-03-15 18:44:51
+ * @LastEditTime: 2022-03-15 20:31:01
  * @LastEditors: Celery
  * @Description: 触摸屏各项操作实心，使用tslib库
  * @FilePath: \celery_production_tool\input\touchscreen.c
@@ -19,7 +19,7 @@ struct tsdev *ts;
  * @param {*}
  * @return {*}
  */
-int touchscreen_init(void)
+static int touchscreen_init(void)
 {
     ts = ts_setup(NULL, 0);
 	if (!ts)
@@ -36,7 +36,7 @@ int touchscreen_init(void)
  * @param {*}
  * @return {*}
  */
-int touchscreen_exit(void)
+static int touchscreen_exit(void)
 {
     ts_close(ts);
 
@@ -48,7 +48,7 @@ int touchscreen_exit(void)
  * @param {input_event_t} *input_event
  * @return {*}
  */
-int touchscreen_get_input_event(input_event_t *input_event)
+static int touchscreen_get_input_event(input_event_t *input_event)
 {
     struct ts_sample samp;
     int ret;

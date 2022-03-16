@@ -1,7 +1,7 @@
 /*
  * @Author: Celery
  * @Date: 2022-03-14 21:04:29
- * @LastEditTime: 2022-03-15 18:48:11
+ * @LastEditTime: 2022-03-15 20:30:30
  * @LastEditors: Celery
  * @Description: 
  * @FilePath: \celery_production_tool\input\input_manager.c
@@ -34,7 +34,7 @@ static size_t rear = 0;
  * @param {*}
  * @return {*}
  */
-bool is_queen_empty(void)
+static bool is_queen_empty(void)
 {
     return (rear + 1) % ARRAY_SIZE == front;
 }
@@ -44,7 +44,7 @@ bool is_queen_empty(void)
  * @param {*}
  * @return {*}
  */
-bool is_queen_full(void)
+static bool is_queen_full(void)
 {
     return (rear + 2) % ARRAY_SIZE == front;
 }
@@ -54,7 +54,7 @@ bool is_queen_full(void)
  * @param {QUEEN_TYPE} value
  * @return {*}
  */
-void queen_insert(QUEEN_TYPE value)
+static void queen_insert(QUEEN_TYPE value)
 {
     assert(!is_queen_full());
     rear = (rear + 1) % ARRAY_SIZE;
@@ -66,7 +66,7 @@ void queen_insert(QUEEN_TYPE value)
  * @param {*}
  * @return {*}
  */
-void queen_delete(void)
+static void queen_delete(void)
 {
     assert(!is_queen_empty());
     front = (front + 1) % ARRAY_SIZE;
@@ -77,7 +77,7 @@ void queen_delete(void)
  * @param {*}
  * @return {*}
  */
-QUEEN_TYPE queen_first(void)
+static QUEEN_TYPE queen_first(void)
 {
     assert(!is_queen_empty());
     return queen_input_event[front];
@@ -88,7 +88,7 @@ QUEEN_TYPE queen_first(void)
  * @param {QUEEN_TYPE} *value
  * @return {0：获取成功 -1：获取失败}
  */
-int queen_put(QUEEN_TYPE *value)
+static int queen_put(QUEEN_TYPE *value)
 {
     if (is_queen_empty()) {
         return -1;

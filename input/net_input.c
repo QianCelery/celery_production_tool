@@ -1,7 +1,7 @@
 /*
  * @Author: Celery
  * @Date: 2022-03-15 15:05:27
- * @LastEditTime: 2022-03-15 18:40:49
+ * @LastEditTime: 2022-03-15 20:30:50
  * @LastEditors: Celery
  * @Description: 
  * @FilePath: \celery_production_tool\input\net_input.c
@@ -22,7 +22,7 @@
 
 int socket_server;
 
-int net_input_init(void)
+static int net_input_init(void)
 {
     struct sockaddr_in socket_server_addr;
     int ret;
@@ -47,13 +47,13 @@ int net_input_init(void)
     return 0;
 }
 
-int net_input_exit(void)
+static int net_input_exit(void)
 {
     close(socket_server);
     return 0;
 }
 
-int net_input_get_input_event(input_event_t *input_event)
+static int net_input_get_input_event(input_event_t *input_event)
 {
     struct sockaddr_in socket_client_addr;
     
