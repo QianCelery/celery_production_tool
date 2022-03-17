@@ -1,7 +1,7 @@
 /*
  * @Author: Celery
  * @Date: 2022-03-16 11:01:04
- * @LastEditTime: 2022-03-16 15:20:02
+ * @LastEditTime: 2022-03-17 20:28:49
  * @LastEditors: Celery
  * @Description: 
  * @FilePath: \celery_production_tool\ui\button.c
@@ -69,12 +69,13 @@ static int default_press_button(button_obj_t *button, display_buff_t *display_bu
  * @param {PRESS_BUTTON_FUNC} press_button
  * @return {*}
  */
-void button_init(char *name, button_obj_t *button, region_t region, DRAW_BUTTON_FUNC draw_button, PRESS_BUTTON_FUNC press_button)
+void button_init(char *name, button_obj_t *button, region_t *region, DRAW_BUTTON_FUNC draw_button, PRESS_BUTTON_FUNC press_button)
 {
     button->name = name;
     button->state = BUTTON_STATE_DEFAULT; 
     button->font_size = BUTTON_TEXT_DEFAULT_SIZE;
-    button->region = region;
+    if (region) 
+        button->region = *region;
     button->draw_button = draw_button ? draw_button : default_draw_button;
     button->press_button = press_button ? press_button : default_press_button;
 }

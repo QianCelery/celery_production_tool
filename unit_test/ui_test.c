@@ -1,7 +1,7 @@
 /*
  * @Author: Celery
  * @Date: 2022-03-13 21:13:01
- * @LastEditTime: 2022-03-16 15:28:20
+ * @LastEditTime: 2022-03-17 20:29:13
  * @LastEditors: Celery
  * @Description: 
  * @FilePath: \celery_production_tool\unit_test\ui_test.c
@@ -60,7 +60,7 @@ int main(int argc, char **argv)
     region.width = 200;
     region.hight = 80;
 
-	// button_init("celery", &button, region, NULL, NULL);
+	// button_init("celery", &button, *region, NULL, NULL);
 	// button.draw_button(&button, display_buff);
 	// while (1) {
 	// 	button.press_button(&button, display_buff, NULL);

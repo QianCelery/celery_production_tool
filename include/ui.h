@@ -1,7 +1,7 @@
 /*
  * @Author: Celery
  * @Date: 2022-03-16 11:01:18
- * @LastEditTime: 2022-03-16 15:18:08
+ * @LastEditTime: 2022-03-17 20:28:54
  * @LastEditors: Celery
  * @Description: 
  * @FilePath: \celery_production_tool\include\ui.h
@@ -41,6 +41,6 @@ typedef struct _button_obj_t {
 } button_obj_t;
 
 
-void button_init(char *name, button_obj_t *button, region_t region, DRAW_BUTTON_FUNC draw_button, PRESS_BUTTON_FUNC press_button);
+void button_init(char *name, button_obj_t *button, region_t *region, DRAW_BUTTON_FUNC draw_button, PRESS_BUTTON_FUNC press_button);
 
 #endif
