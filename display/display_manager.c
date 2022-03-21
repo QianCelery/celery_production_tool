@@ -1,7 +1,7 @@
 /*
  * @Author: Celery
  * @Date: 2022-03-13 21:12:18
- * @LastEditTime: 2022-03-16 19:06:14
+ * @LastEditTime: 2022-03-21 21:23:43
  * @LastEditors: Celery
  * @Description: 显示设备管理器，实现对各类显示设备的注册与操作
  * @FilePath: \celery_production_tool\display\display_manager.c
@@ -11,6 +11,7 @@
 #include <string.h>
 
 #include "display_manager.h"
+#include "font_manager.h"
 
 //管理底层的显示设备，LCD、WEB显示等
 static display_operations_t *sys_display_opr = NULL;
@@ -30,21 +31,16 @@ void draw_text_in_region_central(char *text, region_t region, unsigned int color
 {
     int i = 0;
     int ret;
-    int num = strlen(text);
     font_bitmap_t font_bitmap;
-    int font_size = region.width / num / 2;
+    region_cartesian_t region_car;
 
     int origin_x;
     int origin_y;
 
-    if (font_size > region.hight) {
-        font_size = region.hight;
-    }
+    get_string_region_cartesian(text, &region_car);
 
-    set_font_size(font_size);
-
-    origin_x = region.x_res + (region.width - num * font_size) / 2;
-    origin_y = region.y_res + (region.hight - font_size) / 2;
+    origin_x = region.x_res + (region.width - region_car.width) / 2 + region_car.x_res;
+    origin_y = region.y_res + (region.hight - region_car.hight) / 2 + region_car.y_res;
 
     for (i = 0; text[i] != '\0'; ++i) {
         font_bitmap.cur_origin_x = origin_x;

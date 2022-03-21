@@ -1,7 +1,7 @@
 /*
  * @Author: Celery
  * @Date: 2022-03-15 19:46:27
- * @LastEditTime: 2022-03-16 09:52:00
+ * @LastEditTime: 2022-03-21 20:56:53
  * @LastEditors: Celery
  * @Description: 
  * @FilePath: \celery_production_tool\font\font_manager.c
@@ -80,4 +80,15 @@ int set_font_size(int font_size)
 int get_font_bitmap(unsigned int code, font_bitmap_t *font_bitmap)
 {
     return default_font_opr->get_font_bitmap(code, font_bitmap);
+}
+
+/**
+ * @description: 从默认显示系统获取指定字符长外框
+ * @param {char} *str
+ * @param {region_cartesian_t} *region_car
+ * @return {*}
+ */
+int get_string_region_cartesian(char *str, region_cartesian_t *region_car)
+{
+    return default_font_opr->get_string_region_cartesian(str, region_car);
 }
